@@ -1,0 +1,34 @@
+# Run commands
+# $ docker-compose up -d
+# $ docker-compose up --build
+# $ docker-compose down
+# $ docker ps 
+# access browser via http://127.0.0.1:8000 or localhost:8000
+
+services:
+
+  web:    # Running our app.py 
+    build: .
+    ports:
+      - "8000:5000"  # http://127.0.0.1:8000
+      
+  redis:    # in-memory, key-value data store. More details: https://registry.hub.docker.com/_/redis/
+    image: "redis:alpine"
+    
+#  db:
+#    image: "mysql"
+#    container_name: mysql-2
+#    command: --default-authentication-plugin=mysql_native_password
+#    restart: always
+ #   environment:
+ #     MYSQL_ROOT_PASSWORD: root
+ #     # When container is first created, this database and superuser are created
+  #    MYSQL_DATABASE: testdb1
+ #     MYSQL_USER: user1
+ #     MYSQL_PASSWORD: user1password
+ #   ports:
+ #     - 3308:3306
+ #   volumes:
+ #     - ./sql:/media # Shared folder, just in case
+ #     - ./sql:/docker-entrypoint-initdb.d # Scripts in this folder are run automatically at container creation
+ #     # - ./sql/data:/var/lib/mysql # MySQL data folder

@@ -1,0 +1,4 @@
+flask
+redis
+pyyaml
+mysql-connector-python
