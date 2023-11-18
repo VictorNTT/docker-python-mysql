@@ -27,10 +27,10 @@ services:
     ports:
       - 3308:3306
     volumes:
-     
-      - ./sql:/media # Shared folder, just in case
+      #- ./temp_mysql_init:/var/lib/mysql
       - ./sql:/docker-entrypoint-initdb.d:rw # Scripts in this folder are run automatically at container creation
-      # - ./sql/data:/var/lib/mysql # MySQL data folder
+      - ./sql:/media
+      
       
   web:    # Running our app.py 
     build: .

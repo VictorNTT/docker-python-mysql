@@ -75,14 +75,19 @@ def loadData(html, dbFromContainer):
             
             html+= "<p>Connected to <u>MySql from docker container.</u>"
             
-            sqlQry = "SELECT CURRENT_TIME(), quote FROM testdb.Quote;"
-            html += "<p>Running SQL: <b> " + sqlQry + "</b><br><br>"
+            #sqlQry = "SELECT CURRENT_TIME(), quote FROM testdb.Quote;"
+            sqlQry = "select user, Create_Priv, Update_Priv, Select_priv, Insert_priv, Delete_priv from mysql.user;"
+            html += "<p>Running SQL: <b> " + sqlQry + "</b><br></p>"            
+            html += "<table border='1'><tr><th>User</th><th>Create_Priv</th><th>Update_Priv</th><th>Select_priv</th><th>Insert_priv</th><th>Delete_priv</th></tr>"
+            
             with cnx.cursor() as cursor:
                 result = cursor.execute(sqlQry)
                 rows = cursor.fetchall()
                 for r in rows:
-                    line = "<li>{} :: {}".format(r[0], r[1])
-                    html += line             
+                    line = "<tr><td>{}</td><td>{}</td><td>{}</td><<td>{}</td><td>{}</td><td>{}</td></tr>".format(r[0],r[1],r[2],r[3], r[4], r[5])
+                    html += line  
+                    
+            html += "</table>"
         else:
             
             html+= "<p>Connected to <u>MySql from host machine.</u>" 
